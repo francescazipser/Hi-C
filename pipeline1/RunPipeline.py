@@ -6,6 +6,7 @@ mp.map_promoter_gene_ID('<path to gene annotations table>',
 	'<path to NCBI gene ID table>' + 'tabs',
 	)
 # pandas version used: 1.2.5
+# python version used: 3.8.10
 # gene annotations table (txt file) -- gene annotations table from UCSC database https://genome.ucsc.edu/cgi-bin/hgTables. 
 #	Settings -- settings Mammal, Human, GRCh38/hg38, Gene and Gene Predictions, NCBI RefSeq, RefSeq Curated (ncbiRefSeqCurated), 
 #	region:genome, filter = NM_* 
