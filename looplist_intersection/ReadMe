@@ -1,3 +1,3 @@
-To use RunIntersect, the looplist must be in this format:
+To use RunIntersect, the looplists must be in this format:
 
 chrN  start1 end1 chrN  start2  end2 ...  ... ... ...
