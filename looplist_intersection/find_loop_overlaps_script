@@ -1,0 +1,19 @@
+#!/bin/bash
+#$ -S /bin/bash
+#SBATCH --nodes=1
+#SBATCH --time=01:00:00
+source /etc/bash_env_mod.sh
+module load conda bedtools
+conda activate hic_maps
+
+python -c 'import loops_to_loop_name; loops_to_loop_name.convert("/udd/spfzi/hic_A549/hiccups/ENCFF121YPY_hiccups/merged_loops_reformatted.bedpe","/udd/spfzi/hic_A549/hiccups/ENCFF121YPY_hiccups/merged_loops_A1.bedpe","/udd/spfzi/hic_A549/hiccups/ENCFF121YPY_hiccups/merged_loops_A2.bedpe","a")'
+
+python -c 'import loops_to_loop_name; loops_to_loop_name.convert("/udd/spfzi/hic_A549/hicexplorer/hicDetectLoops/ENCFF121YPY_loops.bedgraph","/udd/spfzi/hic_A549/hicexplorer/hicDetectLoops/ENCFF121YPY_loops_B1.bedgraph","/udd/spfzi/hic_A549/hicexplorer/hicDetectLoops/ENCFF121YPY_loops_B2.bedgraph","b")'
+
+python -c 'import pybedtools_intersect; pybedtools_intersect.intersect("/udd/spfzi/hic_A549/hiccups/ENCFF121YPY_hiccups/merged_loops_A1.bedpe", "/udd/spfzi/hic_A549/hicexplorer/hicDetectLoops/ENCFF121YPY_loops_B1.bedgraph","/udd/spfzi/hic_A549/overlap_hicexplorer_hiccups_5kb_default_A1B1")'
+
+python -c 'import pybedtools_intersect; pybedtools_intersect.intersect("/udd/spfzi/hic_A549/hiccups/ENCFF121YPY_hiccups/merged_loops_A2.bedpe", "/udd/spfzi/hic_A549/hicexplorer/hicDetectLoops/ENCFF121YPY_loops_B2.bedgraph","/udd/spfzi/hic_A549/overlap_hicexplorer_hiccups_5kb_default_A2B2")'
+
+
+python -c 'import filter; filter.filter("/udd/spfzi/hic_A549/overlap_hicexplorer_hiccups_5kb_default_A1B1","/udd/spfzi/hic_A549/overlap_hicexplorer_hiccups_5kb_default_A2B2","/udd/spfzi/hic_A549/overlap_hicexplorer_hiccups_5kb_default_unique")'
+
